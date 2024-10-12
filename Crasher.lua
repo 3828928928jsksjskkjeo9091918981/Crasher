@@ -6,7 +6,7 @@ local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local PlayerGui = Player.PlayerGui
 
-local Chat = PlayerGui:FindFirstChild("Chat") 
+local Chat = PlayerGui:FindFirstChild("Chat")
 local MessageDisplay = Chat and Chat:FindFirstChild("Frame_MessageLogDisplay", true)
 local Scroller = MessageDisplay and MessageDisplay:FindFirstChild("Scroller")
 
@@ -41,8 +41,12 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local SayMessageRequest = ReplicatedStorage:FindFirstChild("SayMessageRequest", true)
 
 if SayMessageRequest then
-    while true do
-        SayMessageRequest:FireServer(Message, "All")
-        task.wait(0.05)
-    end
+    repeat
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player ~= Player then
+                SayMessageRequest:FireServer(Message, player.Name)
+            end
+        end
+        task.wait(0.1)
+    until false
 end
