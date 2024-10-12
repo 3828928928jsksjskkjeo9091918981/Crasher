@@ -1,4 +1,4 @@
--- ANTICRASH --
+-- anticrash
 if not game:IsLoaded() then
     game.Loaded:wait()
 end
@@ -41,7 +41,7 @@ local ChatAdded = Scroller.ChildAdded:Connect(function(x)
         end
     end
 end)
--- CRASHER --
+-- now crash
 local Message = "⛓"
 local Unicode = " "
 Message = Message .. Unicode:rep(200 - #Message)
